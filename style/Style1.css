@@ -1,0 +1,177 @@
+*{
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url("images/bgbody.jpg");
+    background-size: cover;
+}
+.container {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 98vw;
+    height: 97vh;
+}
+.inner {
+	width: 30vw;
+    height: 82vh;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 10px;
+}
+
+.innerprofil {
+	  width: 40vw;
+    height: 82vh;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 10px;
+}
+
+.title {
+	   width: 30vw;
+     height: 8vh;
+     display: flex;
+     align-items: center;
+     background: rgba(6, 234, 41, 0.38);
+     color: #ffffff;
+     margin-bottom: 5%;
+}
+
+.titleprofil {
+	width: 40vw;
+    height: 8vh;
+     display: flex;
+    align-items: center;
+    background: rgba(6, 234, 41, 0.38);
+    color: #ffffff;
+    margin-bottom: 5%;
+}
+
+
+.title h3{
+
+   padding-left: 8%;
+   font-size: 2em;
+}
+
+.titleprofil h3{
+   padding-top: 2%;
+   padding-left: 10%;
+   font-size: 2em;
+}
+
+.infoprofil li {list-style-type: none;}
+.infoprofil li:before {
+	content: "→ "; /* caractère ISO 10646 */
+  padding-left: 10%;
+}
+
+
+
+ .content{
+   border-bottom: 1px solid white;
+      height: 25vh;
+}
+.txt{
+    background: #fffefe;
+    margin-top: 5%;
+    margin-left: 8%;
+    width: 25vw;
+}
+.txt1 {
+	background: #fffefe;
+    margin-top: 1%;
+    margin-left: 8%;
+    width: 25vw;
+}
+
+.txt1 span{
+	padding-right: 2%;
+    padding-left: 2%;
+}
+
+#span{
+    margin-left: 3vw;
+    color: red;
+    font-size: 1.2em;
+}
+.glyphicon {
+	color: #b2b2b2;
+    font-size: 18px;
+}
+
+
+.content input{
+	  width: 22vw;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 0;
+}
+
+.content input[placeholder]{
+	font-size: 1.3em;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.content2 input{
+	width: 11vw;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-left: 8%;
+    margin-top: 5%;
+    border: 0;
+}
+.content2 input[placeholder]{
+	font-size: 1.3em;
+    padding-left: 3%;
+    padding-right: 5%;
+}
+
+
+.ckbox {
+    height: 8vh;
+    border-bottom: 1px solid white;
+}
+.ckbox input{
+	margin-left: 8%;
+}
+.ckbox span{
+	 font-size: 1.3em;
+    margin-left: 3%;
+}
+.photo {
+	  display: table-cell;
+    width: 38%;
+    height: 37%;
+    margin: auto;
+    border: 2px solid #726b6b;
+    border-radius: 100%;
+}
+.btnsub {
+	text-align: right;
+}
+.btnsub input{
+	margin-right: 10%;
+    padding: 2% 6% 2% 6%;
+    margin-top: 3%;
+    background-color: rgb(206, 217, 255);
+    border: 0;
+    color: black;
+
+}
+.btnsub input:hover{
+    background-color:#44ff44;
+}
+.errors {
+	position: absolute;
+    width: 20vw;
+    height: 70vh;
+    margin-left: 25%;
+    text-align: center;
+}
+p{
+	color: red;
+    margin-left: 4vw;
+    font-size: 1.2em;
+}

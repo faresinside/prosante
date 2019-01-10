@@ -31,7 +31,7 @@ if (isset($_POST['upload'])) {
 
                upload_image($file_ext,$file_destination,$file_error,$file_size,$file_tmp);
 
-               header("Location: ./profilpic.php");
+               header("Location: ./profil.php");
 
            }
        }

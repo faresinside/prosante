@@ -12,9 +12,12 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
     }
 
     // On récupère les informations de l'utilisateur connecté
-      $afficher_profil = $db->query("SELECT * FROM professionnels WHERE id ='".$_SESSION['id']."'");
+    //  $afficher_profil = $db->query("SELECT * FROM professionnels WHERE id ='".$_SESSION['id']."'");
+    //$afficher_profil = $afficher_profil->fetch();
 
-    $afficher_profil = $afficher_profil->fetch();
+    $req = $db->query("SELECT * FROM forum ORDER BY ordre");
+
+   $req = $req->fetchAll();
 
 ?>
 <!doctype html>
@@ -24,7 +27,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" >
-        <link rel="stylesheet" href="../style/style1.css">
+        <link rel="stylesheet" href="../style/styleForum.css">
         <title>Mon profil</title>
     </head>
 
@@ -41,7 +44,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
           <a class="nav-link" href="#">Profil <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../forum">Forum</a>
+          <a class="nav-link" href="#">Forum</a>
         </li>
       </ul>
 
@@ -62,54 +65,39 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
     </div>
   </nav>
   <div class="container">
-      <div class="innerprofil">
+      <div class="row">
 
-          <div class="titleprofil">
-              <h3>Profil de <?= $afficher_profil['nom'] . " " .  $afficher_profil['prenom']; ?></h3>
+          <div class="col-sm-0 col-md-0 col-lg-0"></div>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+              <h1 style="text-align: center">Forum</h1>
+
+              <div class="table-responsive" style="margin-top: 10px">
+                  <table class="table table-striped">
+                      <tr>
+                          <th>ID</th>
+                          <th>Titre</th>
+                      </tr>
+                  <?php
+                      foreach($req as $r){
+                      ?>
+                          <tr>
+                              <td>
+                                  <?= $r['id'] ?>
+                              </td>
+                              <td>
+                                  <a href="<?= $r['id'] ?>"><?= $r['titre'] ?></a>
+                              </td>
+                          </tr>
+                      <?php
+                      }
+                  ?>
+                  </table>
+              </div>
           </div>
-
-          <div class="profilpic">
-            <?php
-                  if(file_exists($afficher_profil['photo']) && isset($_SESSION['avatar'])){
-
-               ?>
-
-                  <img src="<?=  $afficher_profil['photo']; ?>"  class="photo">
-
-
-               <?php
-                  }else{
-               ?>
-                  <img src="../public/profilpic/default/user.png" class="photo" >
-
-               <?php
-                  }
-               ?>
-
-
-
-          </div>
-
-          <div class="content">
-
-            <div class="infoprofil">
-            <div> Vos informations : </div>
-                <ul>
-                    <li>Votre id est : <?= $afficher_profil['id'] ?></li>
-                    <li>Votre mail est : <?= $afficher_profil['mail'] ?></li>
-                    <li>Votre adresse est : <?= $afficher_profil['adresse'] ?></li>
-                    <li>Votre telephone est : <?= $afficher_profil['telephone'] ?></li>
-                    <li>Votre specialite est : <?= $afficher_profil['specialite'] ?></li>
-                </ul>
-            </div>
-            <div class="">
-              <a href="profilpicupload.php">Modifier votre photo</a>
-            </div>
-          </div>
-
       </div>
-
   </div>
+
+
 
 
 

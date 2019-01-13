@@ -29,7 +29,11 @@ $req = $db->prepare("SELECT t.*, DATE_FORMAT(t.date_creation, 'Le %d/%m/%Y ') as
 $params = array($get_id_topic,
                 $get_id_forum);
 $req->execute($params);
- $req = $req->fetch();
+$req = $req->fetch();
+
+
+
+
 
 if(!isset($req['id'])){
        header('Location: /forum/' . $get_id_forum);
@@ -47,6 +51,41 @@ if(!isset($req['id'])){
 
        $req_commentaire = $req_commentaire->fetchAll();
 
+       if(!empty($_POST)){
+        extract($_POST);
+        $valid = true;
+
+        // On se positionne sur le formulaire d'ajout d'un commentaire
+        if (isset($_POST['ajout-commentaire'])){
+
+            // On récupère le contenu du commentaire
+            $text  = (String) trim($text);
+
+            // On fait quelques vérifications
+            if(empty($text)){
+                $valid = false;
+                $er_commentaire = "Il faut mettre un commentaire";
+            }elseif(iconv_strlen($text, 'UTF-8') <= 3){
+                $valid = false;
+                $er_commentaire = "Il faut mettre plus de 10 caractères";
+            }
+            // Par précaution on sécurise notre commentaire
+            $text = htmlentities($text);
+
+            if($valid){
+
+                $date_creation = date('Y-m-d H:i:s');
+
+                // On insètre le commentaire dans la base de données
+                $req_addcom=$db->prepare("INSERT INTO topic_commentaire (id_topic, id_user, text, date_creation) VALUES (?, ?, ?, ?)");
+                $params3 = array($get_id_topic, $_SESSION['id'], $text, $date_creation);
+                $req_addcom->execute($params3);
+                header('Location: ' . $get_id_topic);
+                exit;
+            }
+        }
+    }
+
 
 ?>
 <!doctype html>
@@ -61,38 +100,9 @@ if(!isset($req['id'])){
     </head>
 
     <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Accueil</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Profil <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Forum</a>
-        </li>
-      </ul>
-
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-
-      <ul class="navbar-nav ml-md-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="../authentification/deconnexion.php">Déconnexion</a>
-        </li>
-      </ul>
-
-
-
-
-    </div>
-  </nav>
+      <?php
+      require_once"../include/menu.php";
+       ?>
   <div class="container">
           <div class="row">
 
@@ -103,6 +113,8 @@ if(!isset($req['id'])){
                   <div style="background: white; box-shadow: 0 5px 15px rgba(0, 0, 0, .15); padding: 5px 10px; border-radius: 10px">
                       <h3>Contenu</h3>
                       <div style="border-top: 2px solid #eee; padding: 10px 0"><?= $req['contenu'] ?></div>
+                      <img src="../<?=  $req['photo_topic']; ?>"  class="photo">
+                      <?php echo $req['t.photo_topic'] ?>
                       <div style="color: #CCC; font-size: 10px; text-align: right">
                           <?= $req['date_c'] ?>
                           par
@@ -110,7 +122,6 @@ if(!isset($req['id'])){
                       </div>
                   </div>
 
-                  <!-- On vient afficher les commentaire avec un foreach -->
                   <div style="background: white; box-shadow: 0 5px 15px rgba(0, 0, 0, .15); padding: 5px 10px; border-radius: 10px; margin-top: 20px">
                       <h3>Commentaires</h3>
 
@@ -136,6 +147,38 @@ if(!isset($req['id'])){
                           </table>
                       </div>
                   </div>
+
+                  <?php
+                                         // Mis en place de notre espace pour poster des commentaires
+                                         // Uniquement si l'utilisateur est connecté il pourra faire un commentaire
+                                         if(isset($_SESSION['id'])){
+                                     ?>
+
+                  <div style="background: white; box-shadow: 0 5px 15px rgba(0, 0, 0, .15); padding: 5px 10px; border-radius: 10px; margin-top: 20px">
+                      <h3>Ecrire un Commentaire</h3>
+                      <?php
+                            // S'il y a une erreur sur le nom alors on affiche
+                            if (isset($er_commentaire)){
+                            ?>
+                                <div class="er-msg"><?= $er_commentaire ?></div>
+                            <?php
+                            }
+                        ?>
+
+                          <form method="post">
+                              <div class="form-group">
+                                   <textarea class="form-control" name="text" rows="3"></textarea>
+                               </div>
+                               <div class="form-group">
+                                   <button class="btn btn-primary" type="submit" name="ajout-commentaire">Envoyer</button>
+                               </div>
+                           </form>
+
+                  </div>
+
+                  <?php
+                       }
+                   ?>
               </div>
           </div>
       </div>

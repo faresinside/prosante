@@ -1,19 +1,21 @@
 
 
-RewriteEngine On
-RewriteRule ^forum/$ f_forum/forum  [L]
-RewriteRule ^forum/([0-9]+)$ f_forum/sujet?id=$1 [L]
-RewriteRule ^forum/([0-9]+)/([0-9]+)$ f_forum/topic?id_forum=$1&id_topic=$2 [L]
+
+
 
 
 # On autorise de renommer les pages
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 # On peut enlever le .php et renommer les pages comme on le souhaite
-RewriteRule ^([^\.]+)$ $1.php [L]
+
+RewriteRule "^forum/$" "f_forum/forum" [L]
+RewriteRule ^forum/([0-9]+)$ f_forum/sujet?id=$1 [L]
+RewriteRule ^forum/([0-9]+)/([0-9]+)$ f_forum/topic?id_forum=$1&id_topic=$2 [L]
+RewriteRule ^forum/creer-mon-topic$ f_forum/creer_topic  [L]
 
 
-RewriteEngine On
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php
 # On réécrit notre URL et on met [0-9]+ car on sait que dans $1 on aura que des chiffres

@@ -16,7 +16,7 @@ body{
 }
 .inner {
 	width: 30vw;
-    height: 82vh;
+    height: 63vh;
     background: rgba(255, 255, 255, 0.72);
     border-radius: 10px;
 }
@@ -51,10 +51,14 @@ body{
 
 .title h3{
 
-   padding-left: 8%;
-   font-size: 2em;
+    padding-left: 8%;
+    font-size: 2em;
 }
 
+.registration a{
+padding-left: 70%;
+
+}
 .titleprofil h3{
    padding-top: 2%;
    padding-left: 10%;

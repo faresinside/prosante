@@ -32,44 +32,16 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
     </head>
 
     <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Accueil</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Profil <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Forum</a>
-        </li>
-      </ul>
-
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-
-      <ul class="navbar-nav ml-md-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="../authentification/deconnexion.php">Déconnexion</a>
-        </li>
-      </ul>
-
-
-
-
-    </div>
-  </nav>
+      <?php
+      require_once"../include/menu.php";
+       ?>
   <div class="container">
       <div class="row">
 
           <div class="col-sm-0 col-md-0 col-lg-0"></div>
           <div class="col-sm-12 col-md-12 col-lg-12">
-              <h1 style="text-align: center">Forum</h1>
+              <h1 style="text-align: center">Forum <?= $req['titre'] ?></h1>
+
 
               <div class="table-responsive" style="margin-top: 10px">
                   <table class="table table-striped">

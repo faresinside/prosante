@@ -72,29 +72,7 @@ if(isset($_POST["g-recaptcha-response"])) {
 </style>
     </head>
     <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-        <a class="navbar-brand" href="#">Accueil</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="connexion.php">Connexion <span class="sr-only">(current)</span></a>
-            </li>
-
-          </ul>
-
-          <ul class="navbar-nav ml-md-auto">
-
-            <li class="nav-item">
-              <a class="nav-link" href="Registration.php">S'inscrire</a>
-            </li>
-          </ul>
-
-        </div>
-      </nav>
 
                 <form id="register_form" action="./connexion.php" method="post">
                   <div class="container">
@@ -114,6 +92,9 @@ if(isset($_POST["g-recaptcha-response"])) {
                                 <input type="password" placeholder=" mot de passe" name="password" minlength="5" maxlength="20" required>
                                   <span id="c2" class="glyphicon glyphicon-lock"></span>
                               </div>
+                            <div class="registration">
+                              <a href="Registration.php">S'inscrire</a>
+                            </div>
                               <?php
                                   if($authenticate_error != null){
                                       echo($authenticate_error);
@@ -121,7 +102,7 @@ if(isset($_POST["g-recaptcha-response"])) {
                               ?>
                           </div>
 
-                          <div class="g-recaptcha" data-sitekey="6Lcz838UAAAAAOij2RS3nB5nyXrBovK3nXI9OBqX"></div>
+                          <div class="g-recaptcha" data-sitekey="6Lcz838UAAAAAOij2RS3nB5nyXrBovK3nXI9OBqX" ></div>
 
 
                           <div class="btnsub">
@@ -137,6 +118,7 @@ if(isset($_POST["g-recaptcha-response"])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" ></script>
         <script src="../bootstrap/js/bootstrap.min.js" ></script>
         <script type="text/javascript">
+
              $(document).ready(function () {
                  $('#menu_btn').on('click', function () {
                      $('#sidebar').toggleClass('active');

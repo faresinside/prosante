@@ -48,6 +48,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
 
                     $verif_cat->execute($params2);
                     $verif_cat = $verif_cat->fetch();
+                    echo $categorie;
                   echo "fares";
                   if (!isset($verif_cat['id'])){
                       $valid = false;
@@ -72,7 +73,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
                       $file_destination = "../public/profilpic/".$file_name_new;
 
                       $date_creation = date('Y-m-d H:i:s');
-                      $req4=$db->prepare("INSERT INTO topic (id_forum, titre, contenu, date_creation, id_user,photo_topic) VALUES (?, ?, ?, ?, ?,?)");
+                      $req4=$db->prepare("INSERT INTO sujet (id_forum, titre, contenu, date_creation, id_user,photo) VALUES (?, ?, ?, ?, ?,?)");
                       $params3 =  array($categorie, $titre, $contenu, $date_creation, $_SESSION['id'],$file_destination);
                       $req4->execute($params3);
 
@@ -145,7 +146,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
                <div class="col-sm-12 col-md-12 col-lg-12">
                    <div class="cdr-ins">
 
-                       <h1>Créer mon topic</h1>
+                       <h1>Créer un sujet</h1>
 
                        <form method="post" enctype="multipart/form-data" >
 
@@ -205,7 +206,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
                                }
                            ?>
                            <div class="form-group">
-                               <textarea class="form-control" rows="3" placeholder="Décrivez votre topic" name="contenu"><?php if(isset($contenu)){ echo $contenu; }?></textarea>
+                               <textarea class="form-control" rows="3" placeholder="Décrivez votre sujet" name="contenu"><?php if(isset($contenu)){ echo $contenu; }?></textarea>
                            </div>
 
 

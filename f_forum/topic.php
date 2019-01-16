@@ -15,6 +15,7 @@ $get_id_forum = (int) trim(htmlentities($_GET['id_forum']));
   // Récupération de l'id du topic
 $get_id_topic = (int) trim(htmlentities($_GET['id_topic']));
 
+
   // Si l'une des variables est vide alors on redirige vers la page forum
 if(empty($get_id_forum) || empty($get_id_topic)){
   header('Location: /forum');
@@ -22,7 +23,7 @@ if(empty($get_id_forum) || empty($get_id_topic)){
 }
 
 $req = $db->prepare("SELECT t.*, DATE_FORMAT(t.date_creation, 'Le %d/%m/%Y ') as date_c, U.prenom
-        FROM topic T
+        FROM sujet T
         LEFT JOIN professionnels U ON U.id = T.id_user
         WHERE t.id = ? AND t.id_forum = ?
         ORDER BY t.date_creation DESC");
@@ -41,10 +42,10 @@ if(!isset($req['id'])){
    }
 
 
-   $req_commentaire = $db->prepare("SELECT TC.*, DATE_FORMAT(TC.date_creation, 'Le %d/%m/%Y ') as date_c, U.prenom, U.nom
-           FROM topic_commentaire TC
+   $req_commentaire = $db->prepare("SELECT TC.*, DATE_FORMAT(TC.date_creation, 'Le %d/%m/%Y ') as date_c, U.specialite,U.prenom, U.nom
+           FROM commentaire TC
            LEFT JOIN professionnels U ON U.id = TC.id_user
-           WHERE id_topic = ?
+           WHERE id_sujet = ?
            ORDER BY date_creation DESC");
            $params2 = array($get_id_topic);
            $req_commentaire->execute($params2);
@@ -77,7 +78,7 @@ if(!isset($req['id'])){
                 $date_creation = date('Y-m-d H:i:s');
 
                 // On insètre le commentaire dans la base de données
-                $req_addcom=$db->prepare("INSERT INTO topic_commentaire (id_topic, id_user, text, date_creation) VALUES (?, ?, ?, ?)");
+                $req_addcom=$db->prepare("INSERT INTO commentaire (id_sujet, id_user, contenu, date_creation) VALUES (?, ?, ?, ?)");
                 $params3 = array($get_id_topic, $_SESSION['id'], $text, $date_creation);
                 $req_addcom->execute($params3);
                 header('Location: ' . $get_id_topic);
@@ -113,8 +114,8 @@ if(!isset($req['id'])){
                   <div style="background: white; box-shadow: 0 5px 15px rgba(0, 0, 0, .15); padding: 5px 10px; border-radius: 10px">
                       <h3>Contenu</h3>
                       <div style="border-top: 2px solid #eee; padding: 10px 0"><?= $req['contenu'] ?></div>
-                      <img src="../<?=  $req['photo_topic']; ?>"  class="photo">
-                      <?php echo $req['t.photo_topic'] ?>
+                      <img src="../<?=  $req['photo']; ?>"  class="photo">
+                      <?php echo $req['t.photo'] ?>
                       <div style="color: #CCC; font-size: 10px; text-align: right">
                           <?= $req['date_c'] ?>
                           par
@@ -122,30 +123,27 @@ if(!isset($req['id'])){
                       </div>
                   </div>
 
+
+
                   <div style="background: white; box-shadow: 0 5px 15px rgba(0, 0, 0, .15); padding: 5px 10px; border-radius: 10px; margin-top: 20px">
                       <h3>Commentaires</h3>
-
-                      <div class="table-responsive">
-                          <table class="table table-striped">
                           <?php
                               foreach($req_commentaire as $rc){
                               ?>
-                                  <tr>
-                                      <td>
-                                          <?= "De " . $rc['nom'] . " " . $rc['prenom'] ?></a>
-                                      </td>
-                                      <td>
-                                          <?= $rc['text'] ?>
-                                      </td>
-                                      <td>
-                                          <?= $rc['date_c'] ?>
-                                      </td>
-                                  </tr>
+                                  <div style="border-top: 2px solid #eee; padding: 10px 0"><?= $rc['contenu'] ?></div>
+                                  <div style="color: #CCC; font-size: 10px; text-align: right">
+                                      <?= $rc['date_c'] ?>
+                                      par
+                                      <?= $rc['prenom']." ".$rc['nom']  ?>
+                                  </div>
+                                  <div style="color: #CCC; font-size: 10px; text-align: right">
+                                      Docteur en
+                                      <?= $rc['specialite']  ?>
+                                  </div>
                               <?php
                               }
                           ?>
-                          </table>
-                      </div>
+
                   </div>
 
                   <?php

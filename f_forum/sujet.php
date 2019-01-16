@@ -18,7 +18,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
         exit;
     }
    $req = $db->prepare("SELECT t.*, DATE_FORMAT(t.date_creation, 'Le %d/%m/%Y à ') as date_c, U.prenom
-        FROM topic T
+        FROM sujet T
         LEFT JOIN professionnels U ON U.id = T.id_user
         WHERE t.id_forum = ?
         ORDER BY t.date_creation DESC");
@@ -72,7 +72,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
                                         <?= $r['id'] ?>
                                     </td>
                                     <td>
-                                        <!-- On met un lien pour afficher le topic en entier -->
+                                        <!-- On met un lien pour afficher le sujet en entier -->
                                         <a href="<?= $get_id?>/<?= $r['id']?>"><?= $r['titre'] ?></a>
                                     </td>
                                     <td>

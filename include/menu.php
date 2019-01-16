@@ -16,9 +16,12 @@
       </ul>
 
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
+            <div style="margin-top: 20px">
+               <div id="result-search"></div> <!-- C'est ici que nous aurons nos résultats de notre recherche -->
+           </div>
 
       <ul class="navbar-nav ml-md-auto">
         <li class="nav-item">

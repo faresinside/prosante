@@ -11,11 +11,9 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
         exit;
     }
 
-    // On récupère les informations de l'utilisateur connecté
-    //  $afficher_profil = $db->query("SELECT * FROM professionnels WHERE id ='".$_SESSION['id']."'");
-    //$afficher_profil = $afficher_profil->fetch();
 
-    $req = $db->query("SELECT * FROM forum ORDER BY ordre");
+
+    $req = $db->query("SELECT * FROM forum");
 
    $req = $req->fetchAll();
 
@@ -42,7 +40,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
           <div class="col-sm-12 col-md-12 col-lg-12">
               <h1 style="text-align: center">Forum <?= $req['titre'] ?></h1>
 
-
+              <a href="creer-mon-topic" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Creer un sujet</a>
               <div class="table-responsive" style="margin-top: 10px">
                   <table class="table table-striped">
                       <tr>
@@ -74,9 +72,35 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
 
 
 
-
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" ></script>
             <script src="../bootstrap/js/bootstrap.min.js" ></script>
+            <script>
+    $(document).ready(function(){
+        $('#search').keyup(function(){
+
+            $('#result-search').html('');
+
+            var utilisateur = $(this).val();
+            console.log(utilisateur);
+
+            if(utilisateur != ""){
+                $.ajax({
+                    type: 'GET',
+                    url: '../include/recherche_utilisateur.php',
+                    data: 'user=' + encodeURIComponent(utilisateur),
+                    success: function(data){
+                        if(data != ""){
+                            $('#result-search').append(data);
+                        }else{
+                            document.getElementById('result-search').innerHTML = "<div style='font-size: 20px; text-align: center; margin-top: 10px'>Aucun utilisateur</div>"
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
     </body>
 </html>

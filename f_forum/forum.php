@@ -81,22 +81,13 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
         $('#search').keyup(function(){
 
             $('#result-search').html('');
-
-            var utilisateur = $(this).val();
+            var titre = $(this).val();
             console.log(utilisateur);
 
-            if(utilisateur != ""){
+            if(titre != ""){
                 $.ajax({
                     type: 'GET',
-                    url: '../include/recherche_utilisateur.php',
-                    data: 'user=' + encodeURIComponent(utilisateur),
-                    success: function(data){
-                        if(data != ""){
-                            $('#result-search').append(data);
-                        }else{
-                            document.getElementById('result-search').innerHTML = "<div style='font-size: 20px; text-align: center; margin-top: 10px'>Aucun utilisateur</div>"
-                        }
-                    }
+                    
                 });
             }
         });

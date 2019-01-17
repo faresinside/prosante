@@ -55,7 +55,7 @@ if(isset($_POST["g-recaptcha-response"])) {
     else {$authenticate_error = "<p class='error_msg'>ReCaptcha Invalide</p>";}
     }
 
-    $urerr = "",
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -87,7 +87,6 @@ if(isset($_POST["g-recaptcha-response"])) {
                                 <input type="text" placeholder="Entrez votre mail" id="mail" name="username" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="30" required/>
                                 <span id="c1" class="glyphicon glyphicon-envelope"></span>
                               </div>
-                                 <span id="span"><?php echo $urerr; ?></span>
                               <div class="txt1">
                                 <input type="password" placeholder=" mot de passe" name="password" minlength="5" maxlength="20" required>
                                   <span id="c2" class="glyphicon glyphicon-lock"></span>

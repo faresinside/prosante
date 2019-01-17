@@ -115,7 +115,7 @@ if(!isset($req['id'])){
                       <h3>Contenu</h3>
                       <div style="border-top: 2px solid #eee; padding: 10px 0"><?= $req['contenu'] ?></div>
                       <img src="../<?=  $req['photo']; ?>"  class="photo">
-                      <?php echo $req['t.photo'] ?>
+                    
                       <div style="color: #CCC; font-size: 10px; text-align: right">
                           <?= $req['date_c'] ?>
                           par

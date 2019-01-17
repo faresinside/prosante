@@ -13,9 +13,8 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
 
 
 
-    $req = $db->query("SELECT * FROM forum");
-
-   $req = $req->fetchAll();
+  $req = $db->query("SELECT * FROM forum");
+  $req = $req->fetchAll();
 
 ?>
 <!doctype html>
@@ -38,8 +37,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
 
           <div class="col-sm-0 col-md-0 col-lg-0"></div>
           <div class="col-sm-12 col-md-12 col-lg-12">
-              <h1 style="text-align: center">Forum <?= $req['titre'] ?></h1>
-
+              <h1 style="text-align: center">Forum</h1>
               <a href="creer-mon-topic" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Creer un sujet</a>
               <div class="table-responsive" style="margin-top: 10px">
                   <table class="table table-striped">

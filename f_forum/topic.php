@@ -147,8 +147,7 @@ if(!isset($req['id'])){
                   </div>
 
                   <?php
-                                         // Mis en place de notre espace pour poster des commentaires
-                                         // Uniquement si l'utilisateur est connecté il pourra faire un commentaire
+
                                          if(isset($_SESSION['id'])){
                                      ?>
 

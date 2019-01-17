@@ -46,6 +46,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
                       <tr>
                           <th>ID</th>
                           <th>Titre</th>
+                          <th>nb sujets</th>
                       </tr>
                   <?php
                       foreach($req as $r){
@@ -56,6 +57,9 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
                               </td>
                               <td>
                                   <a href="<?= $r['id'] ?>"><?= $r['titre'] ?></a>
+                              </td>
+                              <td>
+                                  <?= $r['nbSujets'] ?>
                               </td>
                           </tr>
                       <?php
@@ -87,7 +91,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
             if(titre != ""){
                 $.ajax({
                     type: 'GET',
-                    
+
                 });
             }
         });

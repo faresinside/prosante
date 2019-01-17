@@ -77,6 +77,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
                       $params3 =  array($categorie, $titre, $contenu, $date_creation, $_SESSION['id'],$file_destination);
                       $req4->execute($params3);
 
+
                     //  echo $file_destination;
                     //  $db->query("UPDATE topic SET photo_topic='".$file_destination."' ");
                       upload_image($file_ext,$file_destination,$file_error,$file_size,$file_tmp);

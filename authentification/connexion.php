@@ -55,7 +55,7 @@ if(isset($_POST["g-recaptcha-response"])) {
     else {$authenticate_error = "<p class='error_msg'>ReCaptcha Invalide</p>";}
     }
 
-
+    $urerr = "",
 ?>
 <!DOCTYPE html>
 <html>

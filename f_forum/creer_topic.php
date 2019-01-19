@@ -76,10 +76,13 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
                       $req4=$db->prepare("INSERT INTO sujet (id_forum, titre, contenu, date_creation, id_user,photo) VALUES (?, ?, ?, ?, ?,?)");
                       $params3 =  array($categorie, $titre, $contenu, $date_creation, $_SESSION['id'],$file_destination);
                       $req4->execute($params3);
-
-
-                    //  echo $file_destination;
-                    //  $db->query("UPDATE topic SET photo_topic='".$file_destination."' ");
+                      $req5=$db->query("SELECT nbSujets FROM forum  WHERE id=$categorie");
+                      $req5 = $req5->fetch();
+                      $nbsujetsold=$req5[0];
+                      $req6=$db->prepare("UPDATE forum  SET nbSujets = ? WHERE forum.id=$categorie ");
+                      $nbsujets = $nbsujetsold+1;
+                      $params5 = array($nbsujets);
+                      $req6->execute($params5);
                       upload_image($file_ext,$file_destination,$file_error,$file_size,$file_tmp);
 
 
@@ -155,7 +158,7 @@ $db = new Data_Base(SGBD,HOST,DBNAME,USER,PASSWORD);
                                // S'il y a une erreur sur la catégorie alors on affiche
                                if (isset($er_categorie)){
                                ?>
-                                   <div class="er-msg"><?= $er_categorie ?></div>
+                                   <div class="er-msg"><?= $er_categorie ; ?></div>
                                <?php
                                }
                            ?>
